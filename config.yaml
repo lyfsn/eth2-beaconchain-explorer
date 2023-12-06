@@ -14,9 +14,12 @@ bigtable:
   emulatorPort: 32823
 # Chain network configuration
 chain:
-  name: mainnet
-  configPath: ./config/devnet.chain.yml
-  genesisTimestamp: 1700798400
+  clConfigPath: 'node'
+  elConfigPath: 'local-deployment/elconfig.json'
+# chain:
+#   name: mainnet
+#   configPath: ./config/devnet.chain.yml
+#   genesisTimestamp: 1700798400
 # Note: It is possible to run either the frontend or the indexer or both at the same time
 # Frontend config
 frontend:
