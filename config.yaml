@@ -7,6 +7,11 @@ database:
   password: "password"
 eth1ErigonEndpoint: 'http://127.0.0.1:11245'
 eth1GethEndpoint: 'http://127.0.0.1:11245'
+bigtable:
+  project: explorer
+  instance: explorer
+  emulator: true
+  emulatorPort: 32823
 # Chain network configuration
 chain:
   name: mainnet
