@@ -58,12 +58,12 @@ eth1GethEndpoint: 'http://127.0.0.1:$EL_PORT'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
-  siteDomain: "localhost:8080"
+  siteDomain: "localhost:8099"
   siteName: 'Open Source Ethereum (ETH) Testnet Explorer' # Name of the site, displayed in the title tag
   siteSubtitle: "Showing a local testnet."
   server:
     host: '0.0.0.0' # Address to listen on
-    port: '8080' # Port to listen on
+    port: '8099' # Port to listen on
   readerDatabase:
     name: db
     host: 127.0.0.1
