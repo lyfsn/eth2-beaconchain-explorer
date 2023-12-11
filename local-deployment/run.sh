@@ -38,7 +38,7 @@ fn_start() {
     bash provision-explorer-config.sh
     docker compose --profile=build-once run build-once # build once before starting all services to prevent multiple parallel builds
     docker compose up -d
-    echo "Waiting for explorer to start, then browse http://localhost:8080"
+    echo "Waiting for explorer to start, then browse http://localhost:8099"
 }
 
 fn_stop() {
