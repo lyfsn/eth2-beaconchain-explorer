@@ -56,8 +56,8 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://127.0.0.1:8545'
-eth1GethEndpoint: 'http://127.0.0.1:8545'
+eth1ErigonEndpoint: 'http://78.46.91.61:11545'
+eth1GethEndpoint: 'http://78.46.91.61:11545'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
@@ -99,8 +99,8 @@ indexer:
   # fullIndexOnStartup: false # Perform a one time full db index on startup
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
-    host: 127.0.0.1
-    port: '5052'
+    host: 78.46.91.61
+    port: '9052'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
 EOL
