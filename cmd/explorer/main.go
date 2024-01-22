@@ -77,7 +77,7 @@ func main() {
 		"version":   version.Version,
 		"chainName": utils.Config.Chain.ClConfig.ConfigName}).Printf("starting")
 
-	fmt.Printf("SlotPerEpoch: %v, SecondsPerSlot: %v, GenesisTime: %v\n", utils.Config.Chain.ClConfig.SlotsPerEpoch, utils.Config.Chain.ClConfig.SecondsPerSlot, utils.Config.Chain.ClConfig.GenesisTime)
+	fmt.Printf("SlotPerEpoch: %v, SecondsPerSlot: %v\n", utils.Config.Chain.ClConfig.SlotsPerEpoch, utils.Config.Chain.ClConfig.SecondsPerSlot)
 	if utils.Config.Chain.ClConfig.SlotsPerEpoch == 0 || utils.Config.Chain.ClConfig.SecondsPerSlot == 0 {
 		utils.LogFatal(err, "invalid chain configuration specified, you must specify the slots per epoch, seconds per slot and genesis timestamp in the config file", 0)
 	}
