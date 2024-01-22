@@ -53,17 +53,17 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://127.0.0.1:$EL_PORT'
-eth1GethEndpoint: 'http://127.0.0.1:$EL_PORT'
+eth1ErigonEndpoint: 'http://127.0.0.1:10745'
+eth1GethEndpoint: 'http://127.0.0.1:10745'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
-  siteDomain: "localhost:8080"
+  siteDomain: "localhost:8099"
   siteName: 'Open Source Ethereum (ETH) Testnet Explorer' # Name of the site, displayed in the title tag
   siteSubtitle: "Showing a local testnet."
   server:
     host: '0.0.0.0' # Address to listen on
-    port: '8080' # Port to listen on
+    port: '8099' # Port to listen on
   readerDatabase:
     name: db
     host: 127.0.0.1
@@ -97,7 +97,7 @@ indexer:
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
     host: 127.0.0.1
-    port: '$CL_PORT'
+    port: '4400'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
 EOL
