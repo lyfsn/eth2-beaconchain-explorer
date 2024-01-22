@@ -53,8 +53,8 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://127.0.0.1:10745'
-eth1GethEndpoint: 'http://127.0.0.1:10745'
+eth1ErigonEndpoint: 'http://127.0.0.1:8545'
+eth1GethEndpoint: 'http://127.0.0.1:8545'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
