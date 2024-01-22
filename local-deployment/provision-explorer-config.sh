@@ -97,7 +97,7 @@ indexer:
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
     host: 127.0.0.1
-    port: '4400'
+    port: '5052'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
 EOL
