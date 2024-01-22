@@ -79,7 +79,9 @@ func main() {
 
 	fmt.Printf("SlotPerEpoch: %v, SecondsPerSlot: %v\n", utils.Config.Chain.ClConfig.SlotsPerEpoch, utils.Config.Chain.ClConfig.SecondsPerSlot)
 	if utils.Config.Chain.ClConfig.SlotsPerEpoch == 0 || utils.Config.Chain.ClConfig.SecondsPerSlot == 0 {
-		utils.LogFatal(err, "invalid chain configuration specified, you must specify the slots per epoch, seconds per slot and genesis timestamp in the config file", 0)
+		utils.Config.Chain.ClConfig.SlotsPerEpoch = 32
+		utils.Config.Chain.ClConfig.SecondsPerSlot = 12
+		// utils.LogFatal(err, "invalid chain configuration specified, you must specify the slots per epoch, seconds per slot and genesis timestamp in the config file", 0)
 	}
 
 	if utils.Config.Pprof.Enabled {
