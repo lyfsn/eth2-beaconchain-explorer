@@ -1,17 +1,17 @@
 #! /bin/bash
-CL_PORT=$(kurtosis enclave inspect my-testnet | grep 4000/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/http\:\/\/127.0.0.1\://' | head -n 1)
+CL_PORT=$(kurtosis enclave inspect my-testnet | grep 4000/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/http\:\/\/88.99.94.109\://' | head -n 1)
 echo "CL Node port is $CL_PORT"
 
-EL_PORT=$(kurtosis enclave inspect my-testnet | grep 8545/tcp | tr -s ' ' | cut -d " " -f 5 | sed -e 's/127.0.0.1\://' | head -n 1)
+EL_PORT=$(kurtosis enclave inspect my-testnet | grep 8545/tcp | tr -s ' ' | cut -d " " -f 5 | sed -e 's/88.99.94.109\://' | head -n 1)
 echo "EL Node port is $EL_PORT"
 
-REDIS_PORT=$(kurtosis enclave inspect my-testnet | grep 6379/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/127.0.0.1\://' | head -n 1)
+REDIS_PORT=$(kurtosis enclave inspect my-testnet | grep 6379/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/88.99.94.109\://' | head -n 1)
 echo "Redis port is $REDIS_PORT"
 
-POSTGRES_PORT=$(kurtosis enclave inspect my-testnet | grep 5432/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/postgresql\:\/\/127.0.0.1\://' | head -n 1)
+POSTGRES_PORT=$(kurtosis enclave inspect my-testnet | grep 5432/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/postgresql\:\/\/88.99.94.109\://' | head -n 1)
 echo "Postgres port is $POSTGRES_PORT"
 
-LBT_PORT=$(kurtosis enclave inspect my-testnet | grep 9000/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/127.0.0.1\://' | tail -n 1)
+LBT_PORT=$(kurtosis enclave inspect my-testnet | grep 9000/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/88.99.94.109\://' | tail -n 1)
 echo "Little bigtable port is $LBT_PORT"
 
 cat <<EOF > .env
@@ -38,13 +38,13 @@ chain:
   elConfigPath: 'local-deployment/elconfig.json'
 readerDatabase:
   name: db
-  host: 127.0.0.1
+  host: 88.99.94.109
   port: "$POSTGRES_PORT"
   user: postgres
   password: "pass"
 writerDatabase:
   name: db
-  host: 127.0.0.1
+  host: 88.99.94.109
   port: "$POSTGRES_PORT"
   user: postgres
   password: "pass"
@@ -53,9 +53,9 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://127.0.0.1:8545'
-eth1GethEndpoint: 'http://127.0.0.1:8545'
-redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
+eth1ErigonEndpoint: 'http://88.99.94.109:8545'
+eth1GethEndpoint: 'http://88.99.94.109:8545'
+redisCacheEndpoint: '88.99.94.109:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
   siteDomain: "localhost:8099"
@@ -66,13 +66,13 @@ frontend:
     port: '8099' # Port to listen on
   readerDatabase:
     name: db
-    host: 127.0.0.1
+    host: 88.99.94.109
     port: "$POSTGRES_PORT"
     user: postgres
     password: "pass"
   writerDatabase:
     name: db
-    host: 127.0.0.1
+    host: 88.99.94.109
     port: "$POSTGRES_PORT"
     user: postgres
     password: "pass"
@@ -96,7 +96,7 @@ indexer:
   # fullIndexOnStartup: false # Perform a one time full db index on startup
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
-    host: 127.0.0.1
+    host: 88.99.94.109
     port: '5052'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
@@ -107,7 +107,7 @@ echo "generated config written to config.yml"
 echo "initializing bigtable schema"
 PROJECT="explorer"
 INSTANCE="explorer"
-HOST="127.0.0.1:$LBT_PORT"
+HOST="88.99.94.109:$LBT_PORT"
 cd ..
 go run ./cmd/misc/main.go -config local-deployment/config.yml -command initBigtableSchema
 
