@@ -5,8 +5,15 @@
 # EL_PORT=$(kurtosis enclave inspect my-testnet | grep 8545/tcp | tr -s ' ' | cut -d " " -f 5 | sed -e 's/127.0.0.1\://' | head -n 1)
 # echo "EL Node port is $EL_PORT"
 
-CL_PORT=9052
-EL_PORT=11545
+# IP=88.99.94.109
+# EL_PORT=11545
+# CL_PORT=9052
+# CL_TYPE=lighthouse
+
+IP=78.46.91.61
+EL_PORT=9545
+CL_PORT=5000
+CL_TYPE=prysm
 
 REDIS_PORT=$(kurtosis enclave inspect my-testnet | grep 6379/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/127.0.0.1\://' | head -n 1)
 echo "Redis port is $REDIS_PORT"
@@ -56,8 +63,8 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://88.99.94.109:11545'
-eth1GethEndpoint: 'http://88.99.94.109:11545'
+eth1ErigonEndpoint: 'http://$IP:$EL_PORT'
+eth1GethEndpoint: 'http://$IP:$EL_PORT'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
@@ -96,12 +103,12 @@ frontend:
     imprintTemplate: '{{ define "js" }}{{ end }}{{ define "css" }}{{ end }}{{ define "content" }}Imprint{{ end }}'
 
 indexer:
-  # fullIndexOnStartup: false # Perform a one time full db index on startup
-  # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
+  fullIndexOnStartup: false # Perform a one time full db index on startup
+  indexMissingEpochsOnStartup: false # Check for missing epochs and export them after startup
   node:
-    host: 88.99.94.109
-    port: '9052'
-    type: lighthouse
+    host: $IP
+    port: '$CL_PORT'
+    type: $CL_TYPE
   eth1DepositContractFirstBlock: 0
 EOL
 
