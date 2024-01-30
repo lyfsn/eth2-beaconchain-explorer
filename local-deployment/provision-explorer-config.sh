@@ -5,15 +5,15 @@
 # EL_PORT=$(kurtosis enclave inspect my-testnet | grep 8545/tcp | tr -s ' ' | cut -d " " -f 5 | sed -e 's/127.0.0.1\://' | head -n 1)
 # echo "EL Node port is $EL_PORT"
 
-# IP=88.99.94.109
-# EL_PORT=11545
-# CL_PORT=9052
-# CL_TYPE=lighthouse
+IP=88.99.94.109
+EL_PORT=11545
+CL_PORT=9052
+CL_TYPE=lighthouse
 
-IP=78.46.91.61
-EL_PORT=9545
-CL_PORT=5000
-CL_TYPE=prysm
+# IP=78.46.91.61
+# EL_PORT=9545
+# CL_PORT=5000
+# CL_TYPE=lighthouse
 
 REDIS_PORT=$(kurtosis enclave inspect my-testnet | grep 6379/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/127.0.0.1\://' | head -n 1)
 echo "Redis port is $REDIS_PORT"
