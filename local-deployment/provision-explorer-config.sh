@@ -6,7 +6,7 @@
 # echo "EL Node port is $EL_PORT"
 
 CL_PORT=9052
-EL_PORT=9545
+EL_PORT=11545
 
 REDIS_PORT=$(kurtosis enclave inspect my-testnet | grep 6379/tcp | tr -s ' ' | cut -d " " -f 6 | sed -e 's/tcp\:\/\/127.0.0.1\://' | head -n 1)
 echo "Redis port is $REDIS_PORT"
@@ -56,8 +56,8 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://78.46.91.61:9545'
-eth1GethEndpoint: 'http://78.46.91.61:9545'
+eth1ErigonEndpoint: 'http://88.99.94.109:11545'
+eth1GethEndpoint: 'http://88.99.94.109:11545'
 redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
@@ -99,8 +99,8 @@ indexer:
   # fullIndexOnStartup: false # Perform a one time full db index on startup
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
-    host: 78.46.91.61
-    port: '5000'
+    host: 88.99.94.109
+    port: '9052'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
 EOL
