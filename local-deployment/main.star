@@ -52,37 +52,37 @@ def run(plan, args):
 	)
 
 	# Spin up a local ethereum testnet
-	all_participants, cl_genesis_timestamp, genesis_validators_root = eth_network_module.run(plan, args)
+	# all_participants, cl_genesis_timestamp, genesis_validators_root = eth_network_module.run(plan, args)
 
-	all_el_client_contexts = []
-	all_cl_client_contexts = []
-	for participant in all_participants:
-		all_el_client_contexts.append(participant.el_client_context)
-		all_cl_client_contexts.append(participant.cl_client_context)
+	# all_el_client_contexts = []
+	# all_cl_client_contexts = []
+	# for participant in all_participants:
+	# 	all_el_client_contexts.append(participant.el_client_context)
+	# 	all_cl_client_contexts.append(participant.cl_client_context)
 
-	fuzz_target = "http://{0}:{1}".format(
-		all_el_client_contexts[0].ip_addr,
-		all_el_client_contexts[0].rpc_port_num,
-	)
+	# fuzz_target = "http://{0}:{1}".format(
+	# 	all_el_client_contexts[0].ip_addr,
+	# 	all_el_client_contexts[0].rpc_port_num,
+	# )
 
-	if args["start_tx_spammer"]:
-		plan.print("Launching transaction spammer")
-		transaction_spammer.launch_transaction_spammer(plan, genesis_constants.PRE_FUNDED_ACCOUNTS, fuzz_target, args_with_right_defaults.tx_spammer_params, network_params.electra_fork_epoch)
-		plan.print("Succesfully launched transaction spammer")
+	# if args["start_tx_spammer"]:
+	# 	plan.print("Launching transaction spammer")
+	# 	transaction_spammer.launch_transaction_spammer(plan, genesis_constants.PRE_FUNDED_ACCOUNTS, fuzz_target, args_with_right_defaults.tx_spammer_params, network_params.electra_fork_epoch)
+	# 	plan.print("Succesfully launched transaction spammer")
 
-	if args["start_blob_spammer"]:
-		plan.print("Launching Blob spammer")
-		blob_spammer.launch_blob_spammer(
-			plan,
-			genesis_constants.PRE_FUNDED_ACCOUNTS,
-			fuzz_target,
-			all_cl_client_contexts[0],
-			network_params.deneb_fork_epoch,
-			network_params.seconds_per_slot,
-			network_params.slots_per_epoch,
-			network_params.genesis_delay,
-		)
-		plan.print("Succesfully launched blob spammer")
+	# if args["start_blob_spammer"]:
+	# 	plan.print("Launching Blob spammer")
+	# 	blob_spammer.launch_blob_spammer(
+	# 		plan,
+	# 		genesis_constants.PRE_FUNDED_ACCOUNTS,
+	# 		fuzz_target,
+	# 		all_cl_client_contexts[0],
+	# 		network_params.deneb_fork_epoch,
+	# 		network_params.seconds_per_slot,
+	# 		network_params.slots_per_epoch,
+	# 		network_params.genesis_delay,
+	# 	)
+	# 	plan.print("Succesfully launched blob spammer")
 
 
 def new_config_template_data(cl_node_info, el_uri, lbt_host, lbt_port, db_host, db_port, redis_uri):
