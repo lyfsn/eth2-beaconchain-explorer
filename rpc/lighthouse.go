@@ -208,7 +208,7 @@ func (lc *LighthouseClient) GetEpochAssignments(epoch uint64) (*types.EpochAssig
 	// Now use the state root to make a consistent committee query
 	committeesResp, err := lc.get(fmt.Sprintf("%s/eth/v1/beacon/states/%s/committees?epoch=%d", lc.endpoint, depStateRoot, epoch))
 	if err != nil {
-		return nil, fmt.Errorf("error retrieving committees data: %w", err)
+		//return nil, fmt.Errorf("error retrieving committees data: %w", err)
 	}
 	var parsedCommittees StandardCommitteesResponse
 	err = json.Unmarshal(committeesResp, &parsedCommittees)
