@@ -212,8 +212,15 @@ func (lc *LighthouseClient) GetEpochAssignments(epoch uint64) (*types.EpochAssig
 	}
 	var parsedCommittees StandardCommitteesResponse
 	err = json.Unmarshal(committeesResp, &parsedCommittees)
+	//if err != nil {
+	//	return nil, fmt.Errorf("error parsing committees data: %w", err)
+	//}
 	if err != nil {
-		return nil, fmt.Errorf("error parsing committees data: %w", err)
+		var emptyData []StandardCommitteeEntry
+		for j := 0; j < 1; j++ {
+			emptyData = append(emptyData, StandardCommitteeEntry{})
+		}
+		parsedCommittees = StandardCommitteesResponse{Data: emptyData}
 	}
 
 	assignments := &types.EpochAssignments{
