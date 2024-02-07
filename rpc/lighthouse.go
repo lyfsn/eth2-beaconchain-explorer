@@ -22,7 +22,6 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/prysmaticlabs/go-bitfield"
 )
 
 // LighthouseLatestHeadEpoch is used to cache the latest head epoch for participation requests
@@ -170,6 +169,25 @@ func (lc *LighthouseClient) GetValidatorQueue() (*types.ValidatorQueue, error) {
 	}, nil
 }
 
+func (lc *LighthouseClient) IsEpochOutOfBound(depSlot uint64, epoch uint64, err error) bool {
+	type ErrorResponse struct {
+		Code        int      `json:"code"`
+		Message     string   `json:"message"`
+		StackTraces []string `json:"stacktraces"`
+	}
+	var errResp ErrorResponse
+	if jsonErr := json.Unmarshal([]byte(err.Error()), &errResp); jsonErr != nil {
+		return false
+	}
+	if errResp.Code == 400 && strings.Contains(errResp.Message, "BAD_REQUEST: epoch out of bounds, too far in future") {
+		depEpoch := depSlot / utils.Config.Chain.ClConfig.SlotsPerEpoch
+		if epoch-depEpoch > 1 {
+			return true
+		}
+	}
+	return false
+}
+
 // GetEpochAssignments will get the epoch assignments from Lighthouse RPC api
 func (lc *LighthouseClient) GetEpochAssignments(epoch uint64) (*types.EpochAssignments, error) {
 
@@ -208,19 +226,19 @@ func (lc *LighthouseClient) GetEpochAssignments(epoch uint64) (*types.EpochAssig
 	// Now use the state root to make a consistent committee query
 	committeesResp, err := lc.get(fmt.Sprintf("%s/eth/v1/beacon/states/%s/committees?epoch=%d", lc.endpoint, depStateRoot, epoch))
 	if err != nil {
-		//return nil, fmt.Errorf("error retrieving committees data: %w", err)
+		if lc.IsEpochOutOfBound(uint64(parsedHeader.Data.Header.Message.Slot), epoch, err) {
+			return &types.EpochAssignments{
+				ProposerAssignments: make(map[uint64]uint64),
+				AttestorAssignments: make(map[string]uint64),
+			}, nil
+		} else {
+			return nil, fmt.Errorf("error retrieving committees data: %w", err)
+		}
 	}
 	var parsedCommittees StandardCommitteesResponse
 	err = json.Unmarshal(committeesResp, &parsedCommittees)
-	//if err != nil {
-	//	return nil, fmt.Errorf("error parsing committees data: %w", err)
-	//}
 	if err != nil {
-		var emptyData []StandardCommitteeEntry
-		for j := 0; j < 1; j++ {
-			emptyData = append(emptyData, StandardCommitteeEntry{})
-		}
-		parsedCommittees = StandardCommitteesResponse{Data: emptyData}
+		return nil, fmt.Errorf("error parsing committees data: %w", err)
 	}
 
 	assignments := &types.EpochAssignments{
