@@ -22,6 +22,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	lru "github.com/hashicorp/golang-lru"
+	"github.com/prysmaticlabs/go-bitfield"
 )
 
 // LighthouseLatestHeadEpoch is used to cache the latest head epoch for participation requests
