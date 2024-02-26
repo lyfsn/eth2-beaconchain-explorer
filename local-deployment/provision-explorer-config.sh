@@ -38,13 +38,13 @@ chain:
   elConfigPath: 'local-deployment/elconfig.json'
 readerDatabase:
   name: db
-  host: 127.0.0.1
+  host: 152.53.35.141
   port: "$POSTGRES_PORT"
   user: postgres
   password: "pass"
 writerDatabase:
   name: db
-  host: 127.0.0.1
+  host: 152.53.35.141
   port: "$POSTGRES_PORT"
   user: postgres
   password: "pass"
@@ -53,9 +53,9 @@ bigtable:
   instance: explorer
   emulator: true
   emulatorPort: $LBT_PORT
-eth1ErigonEndpoint: 'http://162.55.240.231:8545'
-eth1GethEndpoint: 'http://162.55.240.231:8545'
-redisCacheEndpoint: '127.0.0.1:$REDIS_PORT'
+eth1ErigonEndpoint: 'http://167.235.117.45:8545'
+eth1GethEndpoint: 'http://167.235.117.45:8545'
+redisCacheEndpoint: '152.53.35.141:$REDIS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
   siteDomain: "localhost:8080"
@@ -66,13 +66,13 @@ frontend:
     port: '8080' # Port to listen on
   readerDatabase:
     name: db
-    host: 127.0.0.1
+    host: 152.53.35.141
     port: "$POSTGRES_PORT"
     user: postgres
     password: "pass"
   writerDatabase:
     name: db
-    host: 127.0.0.1
+    host: 152.53.35.141
     port: "$POSTGRES_PORT"
     user: postgres
     password: "pass"
@@ -96,7 +96,7 @@ indexer:
   # fullIndexOnStartup: false # Perform a one time full db index on startup
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
-    host: 162.55.240.231
+    host: 167.235.117.45
     port: '5052'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
