@@ -107,7 +107,7 @@ indexer:
   # fullIndexOnStartup: false # Perform a one time full db index on startup
   # indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
-    host: 127.0.0.1
+    host: 88.99.94.109
     port: '$CL_PORT'
     type: lighthouse
   eth1DepositContractFirstBlock: 0
@@ -118,7 +118,7 @@ echo "generated config written to config.yml"
 echo "initializing bigtable schema"
 PROJECT="explorer"
 INSTANCE="explorer"
-HOST="127.0.0.1:$LBT_PORT"
+HOST="88.99.94.109:$LBT_PORT"
 cd ..
 go run ./cmd/misc/main.go -config local-deployment/config.yml -command initBigtableSchema
 
