@@ -65,7 +65,7 @@ redisSessionStoreEndpoint: '127.0.0.1:$REDIS_SESSIONS_PORT'
 tieredCacheProvider: 'redis'
 frontend:
   siteDomain: "localhost:8080"
-  siteName: 'Open Source Ethereum (ETH) Testnet Explorer' # Name of the site, displayed in the title tag
+  siteName: '[1] test [] Open Source Ethereum (ETH) Testnet Explorer' # Name of the site, displayed in the title tag
   siteSubtitle: "Showing a local testnet."
   mainCurrency: 'ACE'
   server:
