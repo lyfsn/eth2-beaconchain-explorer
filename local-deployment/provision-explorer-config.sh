@@ -67,6 +67,7 @@ frontend:
   siteDomain: "localhost:8080"
   siteName: 'Open Source Ethereum (ETH) Testnet Explorer' # Name of the site, displayed in the title tag
   siteSubtitle: "Showing a local testnet."
+  mainCurrency: ACE
   server:
     host: '0.0.0.0' # Address to listen on
     port: '8080' # Port to listen on
